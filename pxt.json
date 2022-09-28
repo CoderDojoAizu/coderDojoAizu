@@ -4,7 +4,8 @@
     "dependencies": {
         "core": "*",
         "radio": "*",
-        "microphone": "*"
+        "microphone": "*",
+        "pxt-kitronik-stopbit": "github:kitronikltd/pxt-kitronik-stopbit#v1.1.2"
     },
     "files": [
         "main.blocks",
@@ -18,7 +19,7 @@
         "branch": "v4.0.11",
         "tag": "v4.0.11",
         "commits": "https://github.com/microsoft/pxt-microbit/commits/2b9dd6f9b1588b4ad95673b458b3a6eb156bfbd7",
-        "target": "4.0.16",
+        "target": "5.0.12",
         "pxt": "7.0.8",
         "targetId": "microbit"
     },

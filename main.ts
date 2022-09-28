@@ -59,18 +59,30 @@ function 歯みがき () {
 }
 function 信号制御 () {
     if (control.millis() - 計測開始時間ミリ秒 > 180000) {
-        pins.digitalWritePin(DigitalPin.P2, 信号ON)
-        pins.digitalWritePin(DigitalPin.P1, 信号ON)
-        pins.digitalWritePin(DigitalPin.P0, 信号ON)
+        Kitronik_STOPbit.trafficLightLED(Kitronik_STOPbit.LightColours.Red, Kitronik_STOPbit.DisplayLights.On)
+        Kitronik_STOPbit.trafficLightLED(Kitronik_STOPbit.LightColours.Yellow, Kitronik_STOPbit.DisplayLights.On)
+        Kitronik_STOPbit.trafficLightLED(Kitronik_STOPbit.LightColours.Green, Kitronik_STOPbit.DisplayLights.On)
     } else if (control.millis() - 計測開始時間ミリ秒 > 120000) {
-        pins.digitalWritePin(DigitalPin.P2, 信号ON)
-        pins.digitalWritePin(DigitalPin.P1, 1)
-        pins.digitalWritePin(DigitalPin.P0, 1)
+        if (信号ON) {
+            Kitronik_STOPbit.trafficLightLED(Kitronik_STOPbit.LightColours.Red, Kitronik_STOPbit.DisplayLights.On)
+        } else {
+            Kitronik_STOPbit.trafficLightLED(Kitronik_STOPbit.LightColours.Red, Kitronik_STOPbit.DisplayLights.Off)
+        }
+        Kitronik_STOPbit.trafficLightLED(Kitronik_STOPbit.LightColours.Yellow, Kitronik_STOPbit.DisplayLights.On)
+        Kitronik_STOPbit.trafficLightLED(Kitronik_STOPbit.LightColours.Green, Kitronik_STOPbit.DisplayLights.On)
     } else if (control.millis() - 計測開始時間ミリ秒 > 60000) {
-        pins.digitalWritePin(DigitalPin.P1, 信号ON)
-        pins.digitalWritePin(DigitalPin.P0, 1)
+        if (信号ON) {
+            Kitronik_STOPbit.trafficLightLED(Kitronik_STOPbit.LightColours.Yellow, Kitronik_STOPbit.DisplayLights.On)
+        } else {
+            Kitronik_STOPbit.trafficLightLED(Kitronik_STOPbit.LightColours.Yellow, Kitronik_STOPbit.DisplayLights.Off)
+        }
+        Kitronik_STOPbit.trafficLightLED(Kitronik_STOPbit.LightColours.Green, Kitronik_STOPbit.DisplayLights.On)
     } else {
-        pins.digitalWritePin(DigitalPin.P0, 信号ON)
+        if (信号ON) {
+            Kitronik_STOPbit.trafficLightLED(Kitronik_STOPbit.LightColours.Green, Kitronik_STOPbit.DisplayLights.On)
+        } else {
+            Kitronik_STOPbit.trafficLightLED(Kitronik_STOPbit.LightColours.Green, Kitronik_STOPbit.DisplayLights.Off)
+        }
     }
     if (信号ON == 0) {
         信号ON = 1
@@ -85,6 +97,8 @@ input.onSound(DetectedSound.Loud, function () {
         basic.pause(3000)
         music.startMelody(music.builtInMelody(Melodies.PowerUp), MelodyOptions.Once)
         basic.clearScreen()
+        basic.pause(100)
+        Kitronik_STOPbit.trafficLightLED(Kitronik_STOPbit.LightColours.Red, Kitronik_STOPbit.DisplayLights.Off)
         歯みがき()
     }
 })
